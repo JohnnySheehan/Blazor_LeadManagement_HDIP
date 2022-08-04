@@ -7,18 +7,20 @@ namespace Blazor_LeadManagement_HDIP.Server.Controllers
     [ApiController]
     public class LeadController : ControllerBase
     {
+        
+        private readonly ILeadService _leadService;
 
-        private readonly Data.AppContext _context;
-        public LeadController(Data.AppContext context)
+        public LeadController(ILeadService leadService) //no db context, we are injecting the lead service
         {
-            _context = context;
+            
+            _leadService = leadService;
         }
-
+        //thin controllers : passing data from a request (logic is in the services)
         [HttpGet]
-        public async Task<ActionResult<List<Lead>>> GetLeads()
+        public async Task<ActionResult<ResponseMessage<List<Lead>>>> GetLeads()
         {
-            var leads = await _context.MyLeads.ToListAsync();
-            return Ok(leads);
+            var leadresult = await _leadService.GetLeadsAsync(); //accessing the lead service to return data
+            return Ok(leadresult);
         }
     }
 }

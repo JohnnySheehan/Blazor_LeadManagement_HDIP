@@ -1,10 +1,10 @@
-﻿@inject HttpClient Http
+﻿@inject ILeadService LeadService
 
 <h3>Lead Queue</h3>
 
-@if (Leads == null)
+@if (LeadService.Leads == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Loading Leads...</em></p>
 }
 else
 {
@@ -19,7 +19,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var lead in Leads)
+            @foreach (var lead in LeadService.Leads)
             {
                 <tr>
                     <td> </td>
@@ -35,15 +35,9 @@ else
 }
 
 @code {
-    private static List<Lead> Leads = new List<Lead>();
 
     protected override async Task OnInitializedAsync() //once component is rendered
     {
-        var result = await Http.GetFromJsonAsync<List<Lead>>("api/Lead");
-        if (result != null)
-        {
-            Leads = result;
-        }
-        
+        await LeadService.GetLeads();
     }
 }

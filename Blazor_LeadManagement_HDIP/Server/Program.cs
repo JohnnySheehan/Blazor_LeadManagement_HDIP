@@ -1,5 +1,6 @@
 global using Microsoft.EntityFrameworkCore;
 global using Blazor_LeadManagement_HDIP.Shared;
+global using Blazor_LeadManagement_HDIP.Server.Services.LeadService;
 global using Blazor_LeadManagement_HDIP.Server.Data;
 using Microsoft.AspNetCore.ResponseCompression;
 //using Blazor_LeadManagement_HDIP.Server.Data;
@@ -18,6 +19,9 @@ builder.Services.AddRazorPages();
 
 
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddScoped<ILeadService, LeadService>();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
