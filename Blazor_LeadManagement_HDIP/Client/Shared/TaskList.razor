@@ -1,0 +1,45 @@
+﻿@inject ITaskService TaskService
+
+<h3>Tasks</h3>
+
+@if (TaskService.LeadTasks == null)
+{
+    <p><em>Loading Tasks...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                 <th></th>
+                <th>Task Name</th>
+                <th>Task Descrition</th>
+                <th>Task Lead</th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in TaskService.LeadTasks)
+            {
+                <tr>
+                    <td> </td>
+                   
+                    <td>@task.Name</td>
+                    <td>@task.Description</td>
+                    
+                    
+                    
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+    protected override async Task OnInitializedAsync() //once component is rendered
+    {
+        await TaskService.GetLeadTasks();
+    }
+}

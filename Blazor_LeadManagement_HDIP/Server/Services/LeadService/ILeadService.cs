@@ -3,5 +3,6 @@
     public interface ILeadService
     {
         Task<ResponseMessage<List<Lead>>> GetLeadsAsync();
+        Task<ResponseMessage<Lead>> GetLeadAsync(int leadid);
     }
 }

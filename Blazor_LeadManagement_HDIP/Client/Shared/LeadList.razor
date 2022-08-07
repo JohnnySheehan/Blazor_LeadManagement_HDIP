@@ -1,4 +1,5 @@
 ﻿@inject ILeadService LeadService
+@inject ITaskService TaskService
 
 <h3>Lead Queue</h3>
 
@@ -15,7 +16,7 @@ else
                 <th><i class="oi oi-person"></i></th>
                 <th><i class="oi oi-globe"></i></th>
                 <th><i class="oi oi-info"></i></th>
-                <th><i class="oi oi-envelope-closed"></i></th>
+                
             </tr>
         </thead>
         <tbody>
@@ -23,10 +24,10 @@ else
             {
                 <tr>
                     <td> </td>
-                    <td><a href="#">@lead.FirstName @lead.LastName</a></td>
+                    <td><a href="/lead/@lead.ID">@lead.FirstName @lead.LastName</a></td>
                     <td>@lead.CompanyName</td>
                     <td>@lead.LeadDescription</td>
-                    <td>@lead.CustomerEmail</td>
+                    
                     
                 </tr>
             }
@@ -38,6 +39,7 @@ else
 
     protected override async Task OnInitializedAsync() //once component is rendered
     {
-        await LeadService.GetLeads();
+        await LeadService.GetLeads(); 
     }
+
 }

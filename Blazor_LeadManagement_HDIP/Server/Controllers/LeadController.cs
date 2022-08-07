@@ -19,7 +19,15 @@ namespace Blazor_LeadManagement_HDIP.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<ResponseMessage<List<Lead>>>> GetLeads()
         {
-            var leadresult = await _leadService.GetLeadsAsync(); //accessing the lead service to return data
+            var leadsresult = await _leadService.GetLeadsAsync(); //accessing the lead service to return data
+            return Ok(leadsresult);
+        }
+
+        [HttpGet]
+        [Route("{leadid}")]
+        public async Task<ActionResult<ResponseMessage<Lead>>> GetLead(int leadid)
+        {
+            var leadresult = await _leadService.GetLeadAsync(leadid);
             return Ok(leadresult);
         }
     }

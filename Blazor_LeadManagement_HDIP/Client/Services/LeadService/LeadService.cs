@@ -13,11 +13,17 @@
 
         public List<Lead> Leads { get; set; } = new List<Lead>();
 
+        public async Task<ResponseMessage<Lead>> GetLead(int leadid)
+        {
+            var leadresult = await _http.GetFromJsonAsync<ResponseMessage<Lead>>($"api/lead/{leadid}");
+            return leadresult;
+        }
+
         public async Task GetLeads()
         {
-            var leadresult = await _http.GetFromJsonAsync<ResponseMessage<List<Lead>>>("api/lead");
-            if( leadresult != null && leadresult.Data != null)
-                Leads = leadresult.Data;
+            var leadsresult = await _http.GetFromJsonAsync<ResponseMessage<List<Lead>>>("api/lead");
+            if( leadsresult != null && leadsresult.Data != null)
+                Leads = leadsresult.Data;
         }
 
     }

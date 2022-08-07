@@ -1,0 +1,57 @@
+﻿@page "/lead/{leadid:int}"
+@page "/lead"
+@inject ILeadService LeadService
+@inject ITaskService TaskService
+
+
+<h3>Lead Details</h3>
+
+@if(lead == null)
+{
+    <p><em>@successmessage</em></p> //displays message depending on single lead call
+}
+else
+{
+    
+        <div class="description">
+            <h3>@lead.FirstName @lead.LastName</h3>
+            <h3>@lead.CompanyName</h3>
+            <h3>@lead.CustomerEmail</h3>
+            <h3>@lead.CustomerNumber</h3>
+            <p>@lead.LeadDescription</p>
+            
+        </div>
+        <div>
+            <a href="/task/">ViewTasks</a>
+    </div>
+    
+        
+}
+
+
+@code {
+    private Lead? lead = null;
+   
+
+    private string successmessage = string.Empty;
+
+    [Parameter] //needed to set the ID parameter using on initialise async
+    public int leadid { get; set; }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        successmessage = "Loading details...";
+
+        var leadresult = await LeadService.GetLead(leadid);
+        if(!leadresult.Success)
+        {
+            successmessage = leadresult.Message;
+        }
+        else
+        {
+            lead = leadresult.Data;
+
+        }
+    }
+}

@@ -20,5 +20,7 @@ namespace Blazor_LeadManagement_HDIP.Shared
         public string LeadDescription { get; set; } = string.Empty;
         //public string LeadStatus { get; set; } = string.Empty;
 
+        public List<LeadTask> Tasks { get; set; } = new List<LeadTask>();
+
     }
 }

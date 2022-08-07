@@ -4,5 +4,6 @@
     {
         List<Lead> Leads { get; set; }
         Task GetLeads();
+        Task<ResponseMessage<Lead>> GetLead(int leadid);
     }
 }

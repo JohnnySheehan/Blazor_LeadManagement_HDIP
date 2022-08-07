@@ -6,10 +6,11 @@
         public AppContext(DbContextOptions<Blazor_LeadManagement_HDIP.Server.Data.AppContext> options) : base(options)
         { }
 
-        //seed data
 
+        //seed data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Lead>().HasData(
                 new Lead
                 {
@@ -52,8 +53,52 @@
                     CustomerNumber = "0979282222"
                 }
                 );
+
+            modelBuilder.Entity<LeadTask>().HasData(
+                new LeadTask
+                {
+                    Id = 1,
+                    Name = "Email Sent",
+                    Description = "Email Sent asking for a call time",
+                    TaskType = "Email",
+                    LeadId = 1
+                },
+                new LeadTask
+                {
+                    Id = 2,
+                    Name = "Call",
+                    Description = "Not interested in our product, just attended event",
+                    TaskType = "Call",
+                    LeadId = 1
+                },
+                new LeadTask
+                {
+                    Id = 3,
+                    Name = "LinkedIn Connection Sent",
+                    Description = "Connection sent to stay in contact",
+                    TaskType = "LinkedIn",
+                    LeadId = 1
+                },
+                new LeadTask
+                {
+                    Id = 4,
+                    Name = "Email Sent",
+                    Description = "Email Sent asking for a demo time",
+                    TaskType = "Email",
+                    LeadId = 2
+                },
+                new LeadTask
+                {
+                    Id = 5,
+                    Name = "Email Sent",
+                    Description = "Email Sent asking what piqued their interest going to the event",
+                    TaskType = "Email",
+                    LeadId = 3
+                }
+                ); 
         }
         public DbSet<Lead> MyLeads { get; set; }
+        public DbSet<LeadTask> MyLeadTasks { get; set; }
     }
 
 }
